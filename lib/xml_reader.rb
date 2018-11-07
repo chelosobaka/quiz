@@ -5,6 +5,7 @@ class XmlReader
     file = File.new("data/questions.xml", "r:UTF-8")
     doc = REXML::Document.new file
     collect = []
+    file.close
 
     doc.root.each_element do |x|
       second = x.attributes["second"]
