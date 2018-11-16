@@ -1,6 +1,6 @@
 require "rexml/document"
-class XmlReader
 
+class XmlReader
   def self.read
     file = File.new("data/questions.xml", "r:UTF-8")
     doc = REXML::Document.new file

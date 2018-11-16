@@ -6,10 +6,4 @@ class Question
     @variants = variants.sort_by { rand }
     @good_variant = good_variant
   end
-
-=begin
-  def to_s
-    "#{@second} минут, текст - #{@text}, variants: #{@variants}, good_variant: #{@good_variant}"
-  end
-=end
 end

@@ -12,30 +12,30 @@ end
 
 require 'time'
 
-collect = XmlReader.read#массив объектов Question.
+collect = XmlReader.read # массив объектов Question.
 
-sum_of_current_answers = 0#счётчик правильных ответов.
+sum_of_current_answers = 0 # счётчик правильных ответов.
 
 collect.each_with_index do |question, index_of_question|
-  #вывод вопроса.
+  # вывод вопроса.
   puts"#{index_of_question + 1}. #{question.text}"
-  #вывод вариантов ответа.
+  # вывод вариантов ответа.
   puts "Варианты:"
   question.variants.each_with_index do |variant, index_of_variant|
     puts " #{index_of_variant + 1}. #{variant}"
   end
 
-  time_to_answer = Time.at(question.second.to_i).utc.strftime("%H:%M:%S")#перевод значения в формат времени.
+  time_to_answer = Time.at(question.second.to_i).utc.strftime("%H:%M:%S") # перевод значения в формат времени.
   puts "У вас #{time_to_answer} на ответ:"
-
-  start_time = Time.now#начало отсчёта
+  # начало отсчёта
+  start_time = Time.now
   input = STDIN.gets.to_i - 1
+  # конец отсчёта
+  end_time = Time.now
+  timer = Time.at(end_time - start_time).utc.strftime("%H:%M:%S") # сколько понадобилось на ответ
 
-  end_time = Time.now#конец отсчёта
-  timer = Time.at(end_time - start_time).utc.strftime("%H:%M:%S")#сколько понадобилось на ответ
-
-  if timer <= time_to_answer#уложился ли во время
-    if question.variants[input].to_i == question.good_variant.to_i#правильный ли ответ
+  if timer <= time_to_answer # уложился ли во время
+    if question.variants[input].to_i == question.good_variant.to_i # правильный ли ответ
       puts "Верно."
       sum_of_current_answers += 1
     else
